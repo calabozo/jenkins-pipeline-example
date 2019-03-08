@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+  jenkins:
+    image: jenkins-docker
+    build:
+          context: .
+          dockerfile: Dockerfile-jenkins
+          args:
+               http_proxy: ${http_proxy}
+               https_proxy: ${https_proxy}
+
+    privileged: true
+    environment:
+      - JAVA_OPTS="-Dhudson.footerURL=http://www.myweb.es"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jenkins_home:/var/jenkins_home
+    ports:
+      - "9002:8080"
+    networks:
+      - jenkins_net
+    group_add:
+      # Group id for group "docker"
+      - 990
+
+volumes:
+  jenkins_home:
+
+networks:
+  jenkins_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet:  170.16.0.1/24

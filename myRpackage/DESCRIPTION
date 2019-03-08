@@ -1,0 +1,15 @@
+Package: myRpackage
+Title: MyRpackage
+Version: 0.99
+Authors@R: 
+    person(given = "Jose Maria",
+           family = "Gonzalez",
+           role = c("aut", "cre"),
+           email = "myemail@example.com")
+Description: Package tutorial.
+License: What license it uses
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Suggests: 
+    testthat
